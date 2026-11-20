@@ -1,0 +1,58 @@
+{
+  "name": "rubika-voice-chat",
+  "version": "1.5.3",
+  "author": {
+    "name": "Mohammad Afrouzeh (TechCode)",
+    "url": "https://github.com/techcodeco"
+  },
+  "description": "A lightweight Node.js library for joining and recording Rubika voice chats using WebRTC 🎙️🚀.",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node src/cli.js",
+    "doctor": "node src/cli.js doctor",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@roamhq/wrtc": "0.10.0",
+    "crypto-js": "4.2.0",
+    "node-rsa": "2.0.0"
+  },
+  "keywords": [
+    "rubika",
+    "rubika-voice",
+    "rubika-voice-chat",
+    "rubika-api",
+    "voice-chat",
+    "voice-chat-sdk",
+    "webrtc",
+    "rtc",
+    "nodejs",
+    "node.js",
+    "javascript",
+    "audio",
+    "audio-streaming",
+    "streaming-audio",
+    "audio-recording",
+    "voice-recording",
+    "voice-chat-recording",
+    "real-time-audio",
+    "group-voice-chat",
+    "group-call",
+    "microphone",
+    "media-stream",
+    "voice-chat-library"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/techcodeco/rubika-voice-chat#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/techcodeco/rubika-voice-chat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/techcodeco/rubika-voice-chat/issues"
+  }
+}

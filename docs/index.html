@@ -1,0 +1,1324 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="مستندات Rubika Voice 1.5.3؛ اتصال تک‌ویس‌چت، پخش موسیقی و ضبط ترکیبی کل صدای Voice Chat روبیکا."
+    />
+    <meta name="theme-color" content="#111827" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <title>Rubika Voice Chat — مستندات رسمی</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.12.0/build/styles/github-dark.min.css"
+    />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar">
+        <a class="brand" href="#top">RUBIKA <span>VOICE CHAT</span></a>
+        <div class="navlinks">
+          <a href="#quickstart">شروع سریع</a><a href="#api">API</a
+          ><a href="#recording">ضبط همهٔ صداها</a><a href="#events">رویدادها</a
+          ><a href="#troubleshooting">عیب‌یابی</a>
+        </div>
+      </nav>
+      <div class="hero-content" id="top">
+        <p class="eyebrow">NODE.JS LIBRARY · VOICE CHAT</p>
+        <h1>مستندات <span>Rubika Voice Chat</span></h1>
+        <p class="lead">
+          کتابخانه‌ای مستقل برای ورود به Voice Chat روبیکا، دریافت شرکت‌کنندگان،
+          پخش موسیقی، کنترل صدا و ضبط ترکیبی تمام صدای ویس‌چت در یک فایل صوتی.
+        </p>
+        <div class="hero-meta">
+          <span class="version">نسخهٔ مستندات 1.5.3</span
+          ><span>Node.js 22.x</span><span>JavaScript · CommonJS</span>
+        </div>
+        <div class="hero-actions">
+          <a class="button primary" href="#quickstart">شروع استفاده</a
+          ><a
+            class="button ghost"
+            href="https://github.com/techcodeco/rubika-voice-chat"
+            target="_blank"
+            rel="noopener noreferrer"
+            >مشاهدهٔ مخزن ↗</a
+          ><a
+            class="button ghost"
+            href="https://github.com/techcodeco"
+            target="_blank"
+            rel="noopener noreferrer"
+            >پروفایل توسعه‌دهنده ↗</a
+          >
+        </div>
+        <div class="author-credit" aria-label="اطلاعات سازندهٔ پروژه">
+          <div class="author-heading">
+            <span class="author-tag">سازنده</span
+            ><span class="author-tag" lang="en">CREATED BY</span>
+          </div>
+          <p class="author-name">
+            <strong lang="fa">محمد افروزه</strong
+            ><span aria-hidden="true"> / </span
+            ><strong lang="en" dir="ltr">Mohammad Afrouzeh</strong
+            ><span class="author-brand">TechCode</span>
+          </p>
+          <p class="author-description" lang="fa">
+            کتابخانهٔ Rubika Voice Chat توسط محمد افروزه (TechCode)،
+            توسعه‌دهندهٔ نرم‌افزار، طراحی و توسعه داده شده است.
+          </p>
+          <p class="author-description author-description-en" lang="en">
+            Rubika Voice Chat is designed and developed by Mohammad Afrouzeh
+            (TechCode), a software developer building tools for the Rubika
+            ecosystem.
+          </p>
+          <a
+            class="author-link"
+            href="https://github.com/techcodeco"
+            target="_blank"
+            rel="noopener noreferrer"
+            >پروفایل توسعه‌دهنده در GitHub ↗</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <strong>راهنمای مستندات</strong>
+        <a href="#overview">معرفی</a><a href="#requirements">پیش‌نیازها</a
+        ><a href="#install">نصب و احراز هویت</a
+        ><a href="#quickstart">شروع سریع</a
+        ><a href="#connection">اتصال به ویس‌چت</a
+        ><a href="#single-room">مدیریت یک ویس‌چت</a
+        ><a href="#participants">فهرست شرکت‌کنندگان</a
+        ><a href="#recording">ضبط همهٔ صداها</a
+        ><a href="#playback">پخش و کنترل موسیقی</a
+        ><a href="#api">مرجع تمام متدها</a><a href="#events">رویدادها</a
+        ><a href="#configuration">تنظیمات</a><a href="#logging">مدیریت لاگ</a
+        ><a href="#limitations">محدودیت‌ها</a
+        ><a href="#troubleshooting">عیب‌یابی</a
+        ><a href="#changelog">نسخه و همگام‌سازی</a>
+      </aside>
+
+      <main class="content">
+        <section id="overview">
+          <div class="section-heading">
+            <span>01</span>
+            <h2>معرفی</h2>
+          </div>
+          <p>
+            <b>Rubika Voice Chat</b> یک کتابخانهٔ Node.js است که فقط روی Voice
+            Chat روبیکا تمرکز دارد. API عمومی آن متدهای سیشن، اتصال WebRTC،
+            شرکت‌کنندگان، ترک‌های صوتی، پخش موسیقی و ضبط را ارائه می‌دهد؛ این
+            کتابخانه SDK عمومی پیام‌رسانی نیست.
+          </p>
+          <div class="callout info">
+            <b>نکتهٔ معماری</b>
+            <p>
+              برای اتصال عمومی فقط <code>groupGuid</code> لازم است. مقدار داخلی
+              <code>voice_chat_id</code> توسط کتابخانه از API روبیکا resolve
+              می‌شود و لازم نیست آن را دستی پیدا کنید.
+            </p>
+          </div>
+          <div class="feature-grid">
+            <article>
+              <b>Voice Chat</b>
+              <p>Join، Leave، Mute، Unmute، درخواست صحبت و تنظیمات.</p>
+            </article>
+            <article>
+              <b>Participants</b>
+              <p>گرفتن صفحه‌ای یا کامل فهرست شرکت‌کنندگان.</p>
+            </article>
+            <article>
+              <b>Streaming Recorder</b>
+              <p>ساخت فایل از شروع ضبط و افزودن تدریجی فریم‌ها.</p>
+            </article>
+            <article>
+              <b>Music Player</b>
+              <p>صف پخش، Seek، سرعت 0.5x تا 2x و ولوم.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="requirements">
+          <div class="section-heading">
+            <span>02</span>
+            <h2>پیش‌نیازها</h2>
+          </div>
+          <ul>
+            <li>
+              Node.js نسخهٔ <code>22.5+</code>؛ نسخهٔ پیشنهادی برای محیط پایدار
+              Node 22.x است. پشتیبانی کامل Native WebRTC روی Node 26 هنوز در
+              ماتریس رسمی وابستگی <code>@roamhq/wrtc</code> تأیید نشده است.
+            </li>
+            <li>
+              FFmpeg در PATH سیستم یا مسیر قابل تنظیم با
+              <code>ffmpegPath</code>.
+            </li>
+            <li>
+              Encoderهای <code>libopus</code> برای OGG و
+              <code>libmp3lame</code> برای MP3.
+            </li>
+            <li>
+              وابستگی Native مربوط به <code>@roamhq/wrtc</code> که در این نسخه
+              برای Node 22 هدف‌گذاری شده است.
+            </li>
+            <li>اتصال شبکهٔ خروجی و دسترسی UDP لازم برای WebRTC.</li>
+          </ul>
+          <pre><code class="language-bash">node -v
+ffmpeg -version
+ffmpeg -encoders</code></pre>
+          <p>در ویندوز می‌توانید FFmpeg را با دستور زیر نصب کنید:</p>
+          <pre><code class="language-bash">winget install --id Gyan.FFmpeg -e</code></pre>
+        </section>
+
+        <section id="install">
+          <div class="section-heading">
+            <span>03</span>
+            <h2>نصب و احراز هویت</h2>
+          </div>
+          <pre><code class="language-bash">npm install rubika-voice-chat</code></pre>
+          <h3>روش پیشنهادی: سیشن نام‌دار</h3>
+          <pre><code class="language-javascript">const { VoiceClient } = require('rubika-voice-chat');
+const client = new VoiceClient('my-session');
+
+client.on('session:created', () =&gt; console.log('Session created'));
+client.on('session:loaded', () =&gt; console.log('Session loaded'));
+client.on('error', error =&gt; console.error(error));
+
+await client.start();</code></pre>
+          <p>
+            در اجرای نخست، در صورت نبود سیشن، کتابخانه شماره و کد ورود را از CLI
+            دریافت می‌کند. اگر روبیکا وضعیت <code>SendPassKey</code> برگرداند،
+            راهنمای <code>data.hint_pass_key</code> داخل پرانتز کنار درخواست
+            گذرواژه نمایش داده می‌شود و گذرواژهٔ واردشده به‌عنوان
+            <code>pass_key</code> در درخواست بعدی <code>sendCode</code> ارسال
+            می‌شود. در صورت <code>InvalidPassKey</code> دوباره گذرواژه درخواست
+            می‌شود. اگر <code>signIn</code> وضعیت
+            <code>CodeIsInvalid</code> بدهد کد دوباره پرسیده می‌شود؛ برای
+            <code>CodeIsUsed</code> ابتدا کد تازه درخواست می‌شود. وضعیت‌های
+            اختصاصی ورود از <code>data.status</code> خوانده می‌شوند، نه فقط از
+            وضعیت بیرونی پاسخ؛ بنابراین در شاخهٔ <code>SendPassKey</code> نبودن
+            <code>phone_code_hash</code> خطا محسوب نمی‌شود.
+          </p>
+          <p>
+            <code>registerDevice</code> فقط هنگام ایجاد سشن جدید اجرا می‌شود.
+            بارگذاری سشن ذخیره‌شده، حتی پس از تغییر نسخهٔ برنامه، باعث ثبت مجدد
+            دستگاه نخواهد شد. پس از ورود و ثبت دستگاه، اطلاعات سشن در SQLite
+            رمز‌شده ذخیره می‌شود.
+          </p>
+          <p>
+            اگر <code>selfObjectGuid</code> از قبل تنظیم نشده باشد، کتابخانه
+            برای شناسایی حساب فعلی از <code>getUserInfo</code> با ورودی
+            <code>{ user_guid: undefined }</code> استفاده می‌کند و مقدار
+            <code>data.user.user_guid</code> را می‌خواند.
+          </p>
+          <h3>روش مستقیم: auth و private key</h3>
+          <pre><code class="language-javascript">const client = new VoiceClient(
+  process.env.RUBIKA_AUTH,
+  process.env.RUBIKA_PRIVATE_KEY_B64,
+  { selfObjectGuid: process.env.RUBIKA_SELF_OBJECT_GUID }
+);
+await client.start();</code></pre>
+          <p>
+            کلید خصوصی می‌تواند PEM یا Base64 از JSON دارای
+            <code>version</code> و <code>d</code> باشد. در حالت مستقیم، مقدار
+            <code>auth</code> خامی را بدهید که از منبع معتبر خود دریافت
+            کرده‌اید. برای امکان بازیابی خودکار سیشن پس از
+            <code>NOT_REGISTERED</code>، از سیشن نام‌دار استفاده کنید.
+          </p>
+          <h3>شکل سوم سازنده</h3>
+          <pre><code class="language-javascript">const client = new VoiceClient({
+  auth: process.env.RUBIKA_AUTH,
+  privateKeyB64: process.env.RUBIKA_PRIVATE_KEY_B64,
+  selfObjectGuid: process.env.RUBIKA_SELF_OBJECT_GUID,
+  sessionName: 'persisted-direct-session'
+});</code></pre>
+        </section>
+
+        <section id="quickstart">
+          <div class="section-heading">
+            <span>04</span>
+            <h2>شروع سریع</h2>
+          </div>
+          <pre><code class="language-javascript">const { VoiceClient } = require('rubika-voice-chat');
+
+async function main() {
+  const client = new VoiceClient('my-session');
+  client.on('error', console.error);
+  client.on('voice-chat:joined', e =&gt; console.log('Joined', e.groupGuid));
+  client.on('recording:file-created', e =&gt; console.log('File:', e.output));
+
+  await client.start();
+  await client.joinVoiceChat('GROUP_GUID');
+
+  const people = await client.getAllParticipants();
+  console.log(people);
+
+  await client.play('./music.mp3');
+  await client.setPlaybackSpeed(1.25);
+
+  await client.close(); // ضبط فعال را هم نهایی می‌کند.
+}
+
+main().catch(console.error);</code></pre>
+        </section>
+
+        <section id="connection">
+          <div class="section-heading">
+            <span>05</span>
+            <h2>اتصال و مدیریت Voice Chat</h2>
+          </div>
+          <h3>ورود به گروه</h3>
+          <pre><code class="language-javascript">await client.joinVoiceChat('GROUP_GUID');
+// نام جایگزین:
+await client.connect('GROUP_GUID');</code></pre>
+          <p>
+            برای اتصال، فقط GUID گروه را به کتابخانه می‌دهید. کتابخانه شناسهٔ
+            داخلی <code>voice_chat_id</code> را از API روبیکا دریافت و در همان
+            کلاینت نگهداری می‌کند. لازم نیست آن شناسه را برای ترک ویس‌چت یا ضبط
+            دوباره ارسال کنید.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>گزینه</th>
+                <th>نوع</th>
+                <th>پیش‌فرض</th>
+                <th>توضیح</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>createIfMissing</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>اگر Voice Chat موجود نباشد، آن را ایجاد کند.</td>
+              </tr>
+              <tr>
+                <td><code>session</code></td>
+                <td>object</td>
+                <td>{}</td>
+                <td>
+                  گزینه‌های شروع/ورود سیشن که به <code>start()</code> داده
+                  می‌شوند.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <pre><code class="language-javascript">await client.joinVoiceChat('GROUP_GUID', { createIfMissing: false });</code></pre>
+          <h3>کنترل میکروفون</h3>
+          <pre><code class="language-javascript">await client.mute();
+await client.unmute();
+await client.requestSpeak();</code></pre>
+          <h3>ترک یا پایان Voice Chat</h3>
+          <pre><code class="language-javascript">// خروج از Voice Chat فعلی؛ بدون ارسال chatGuid یا voiceChatId
+await client.leaveVoiceChat();
+
+// disconnect نیز به‌صورت پیش‌فرض از ویس‌چت خارج می‌شود
+await client.disconnect();
+
+// پایان‌دادن به خود Voice Chat گروه، نه فقط اتصال محلی
+await client.discardVoiceChat();
+
+// در پایان برنامه همهٔ منابع آزاد و ضبط فعال finalize می‌شود
+await client.close();</code></pre>
+          <div class="callout warning">
+            <b>شناسه‌ها به‌صورت داخلی مدیریت می‌شوند</b>
+            <p>
+              هنگام خروج، خود کتابخانه جفت <code>chat_guid</code> و
+              <code>voice_chat_id</code> ذخیره‌شده را به API روبیکا ارسال
+              می‌کند. برای ترک اتصال نیازی به کپی یا واردکردن شناسهٔ ویس‌چت
+              نیست. <code>discardVoiceChat()</code> خود Voice Chat گروه را پایان
+              می‌دهد و ممکن است به سطح دسترسی مدیریتی نیاز داشته باشد.
+            </p>
+          </div>
+        </section>
+
+        <section id="single-room">
+          <div class="section-heading">
+            <span>06</span>
+            <h2>مدیریت یک ویس‌چت در هر کلاینت</h2>
+          </div>
+          <p>
+            بر اساس محدودیت API روبیکا، هر نمونهٔ <code>VoiceClient</code> فقط
+            یک Voice Chat فعال را نگهداری می‌کند. همهٔ اجزای WebRTC، Player، صف
+            موسیقی، Recorder و Updateها به همان اتصال واحد تعلق دارند. تلاش برای
+            ورود به گروه دیگر قبل از ترک گروه فعلی با خطای واضح متوقف می‌شود.
+          </p>
+          <pre><code class="language-javascript">// اتصال اول
+await client.joinVoiceChat('GROUP_GUID_1');
+await client.play('./music-room-1.mp3');
+
+// برای تغییر گروه، ابتدا اتصال فعلی را ترک کنید
+await client.leaveVoiceChat();
+
+// سپس به گروه بعدی متصل شوید
+await client.joinVoiceChat('GROUP_GUID_2');
+await client.play('./music-room-2.mp3');</code></pre>
+          <div class="callout info">
+            <b>بدون شناسه هنگام خروج و ضبط</b>
+            <p>
+              GUID گروه فقط هنگام <code>joinVoiceChat(groupGuid)</code> لازم
+              است. پس از اتصال، همهٔ متدهای Player و ضبط از Context فعلی استفاده
+              می‌کنند؛ <code>leaveVoiceChat()</code>،
+              <code>startRecording()</code>، <code>stopRecording()</code> و
+              <code>setRecordingFilter()</code> هیچ شناسهٔ گروه یا ویس‌چتی
+              نمی‌گیرند.
+            </p>
+          </div>
+        </section>
+
+        <section id="participants">
+          <div class="section-heading">
+            <span>07</span>
+            <h2>فهرست شرکت‌کنندگان</h2>
+          </div>
+          <h3>دریافت شرکت‌کنندگان</h3>
+          <pre><code class="language-javascript">// دریافت یک صفحه؛ در صورت وجود ادامه، next_start_id را به صفحه بعد بدهید.
+const page = await client.getParticipants();
+console.log(page.participants, page.has_continue, page.next_start_id);
+
+// دریافت تمام صفحه‌ها تا انتها:
+const all = await client.getAllParticipants();
+
+// API یکپارچه؛ پیش‌فرض همه شرکت‌کنندگان را برمی‌گرداند:
+const participants = await client.getVoiceChatParticipants();
+// فقط یک صفحه:
+const firstPage = await client.getVoiceChatParticipants({ all: false });</code></pre>
+          <p>
+            ساختار اشیای participant همان ساختاری است که API روبیکا برمی‌گرداند؛
+            فیلدهای شناسه، وضعیت و اطلاعات کاربر ممکن است با توجه به پاسخ سرور
+            متفاوت باشند. فهرست شرکت‌کنندگان صرفاً برای مشاهده و مدیریت است و
+            روی ضبط صدا فیلتر فردی اعمال نمی‌کند.
+          </p>
+          <div class="callout warning">
+            <b>ضبط فقط به‌صورت کلی</b>
+            <p>
+              قابلیت ضبط انتخابی افراد، Allow-list، Block-list و نگاشت دستی
+              Track به GUID از API عمومی حذف شده است. ضبط‌کننده تمام صدای
+              دریافتی ویس‌چت را میکس می‌کند و تنها امکان انتخاب اضافه‌شدن یا
+              نشدن صدای خروجی Player با <code>includeSelf</code> وجود دارد.
+            </p>
+          </div>
+        </section>
+
+        <section id="recording">
+          <div class="section-heading">
+            <span>08</span>
+            <h2>ضبط تمام صدای ویس‌چت</h2>
+          </div>
+          <p class="lead small">
+            ضبط‌کننده تمام فریم‌های صوتی Remote ویس‌چت را در میکسر PCM مشترک جمع
+            می‌کند و با یک Encoder به یک فایل OGG/Opus یا MP3 می‌نویسد. فایل
+            مقصد از آغاز ضبط ساخته می‌شود؛ فایل نهایی پس از توقف و finalize
+            قابل‌پخش است.
+          </p>
+          <h3>ضبط همهٔ صداهای Remote</h3>
+          <pre><code class="language-javascript">await client.startRecording({
+  output: './recordings/voice-chat.ogg',
+  format: 'ogg',
+  includeSelf: false,
+  consentConfirmed: true
+});</code></pre>
+          <p>
+            در این حالت تمام صدای دریافتی از اعضای ویس‌چت داخل یک فایل میکس
+            می‌شود. برای ضبط گروه دیگری لازم نیست شناسه وارد کنید؛ کلاینت فقط یک
+            ویس‌چت فعال دارد و ضبط‌کننده به همان اتصال فعلی متصل است.
+          </p>
+          <h3>افزودن صدای self به همان فایل</h3>
+          <pre><code class="language-javascript">await client.startRecording({
+  output: './recordings/voice-chat-with-self.ogg',
+  format: 'ogg',
+  includeSelf: true,
+  consentConfirmed: true
+});</code></pre>
+          <p>
+            <code>includeSelf: true</code> صدای خروجی Player همین کتابخانه را با
+            صدای تمام اعضای Remote در همان فایل ادغام می‌کند. مقدار پیش‌فرض
+            <code>false</code> است. هیچ فایل جداگانه‌ای با نام
+            <code>self</code> ساخته نمی‌شود. self در این API فقط صدای خروجی
+            Player کتابخانه است؛ صدای میکروفون فیزیکی سیستم را ضبط نمی‌کند.
+          </p>
+          <h3>تغییر includeSelf در حین ضبط</h3>
+          <pre><code class="language-javascript">// شروع ضبط بدون صدای self
+await client.startRecording({
+  output: './recordings/live-mix.ogg',
+  includeSelf: false,
+  consentConfirmed: true
+});
+
+// از این لحظه صدای Player هم به همان فایل اضافه شود
+client.setRecordingFilter({ includeSelf: true });
+
+// از این لحظه صدای Player از میکس کنار گذاشته شود
+client.setRecordingFilter({ includeSelf: false });
+
+// توقف و finalize فایل
+await client.stopRecording();</code></pre>
+          <p>
+            نام <code>setRecordingFilter</code> برای سازگاری API حفظ شده، اما
+            دیگر فیلتر شرکت‌کننده ندارد و تنها گزینهٔ معتبر آن
+            <code>includeSelf</code> است. این متد فقط هنگام ضبط فعال قابل
+            استفاده است. تغییر آن در میانهٔ ضبط بر فریم‌های بعدی اثر می‌گذارد.
+          </p>
+          <h3>گزینه‌های شروع ضبط</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>پارامتر</th>
+                <th>نوع</th>
+                <th>پیش‌فرض</th>
+                <th>شرح</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>output</code></td>
+                <td>string</td>
+                <td>خودکار</td>
+                <td>مسیر فایل نهایی؛ پوشه در صورت نیاز ساخته می‌شود.</td>
+              </tr>
+              <tr>
+                <td><code>format</code></td>
+                <td><code>'ogg' | 'mp3'</code></td>
+                <td>از پسوند یا ogg</td>
+                <td>
+                  فرمت خروجی. اگر پسوند مسیر با فرمت مغایر باشد خطا می‌دهد.
+                </td>
+              </tr>
+              <tr>
+                <td><code>includeSelf</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>صدای خروجی Player را در همان فایل میکس کند یا نکند.</td>
+              </tr>
+              <tr>
+                <td><code>consentConfirmed</code></td>
+                <td>boolean</td>
+                <td>false</td>
+                <td>برای شروع باید صریحاً true باشد.</td>
+              </tr>
+              <tr>
+                <td><code>finalizeOnProcessExit</code></td>
+                <td>boolean</td>
+                <td>true</td>
+                <td>هنگام SIGINT/SIGTERM ضبط را graceful finalize کند.</td>
+              </tr>
+            </tbody>
+          </table>
+          <h3>ضبط و تغییر تنظیمات</h3>
+          <pre><code class="language-javascript">// متد جایگزین با نام صریح‌تر؛ همان ضبط همهٔ صداهای ویس‌چت
+await client.startAllParticipantsRecording({
+  output: './recordings/everyone.mp3',
+  format: 'mp3',
+  includeSelf: false,
+  consentConfirmed: true
+});
+
+client.on('recording:file-created', e =&gt; console.log('File opened:', e.output));
+client.on('recording:progress', e =&gt; console.log(e.framesCaptured, e.mixedFrames));
+client.on('recording:filter-changed', e =&gt; console.log('includeSelf:', e.includeSelf));
+client.on('recording:no-audio', e =&gt; console.warn('No audio frames received'));
+client.on('recording:stopped', e =&gt; console.log('Finalized:', e.output));
+
+const files = client.getRecordingFiles();
+await client.stopRecording();</code></pre>
+          <p>
+            <code>startAllParticipantsRecording()</code> فقط alias متد
+            <code>startRecording()</code> است و همان رفتار و همان مقدار پیش‌فرض
+            <code>includeSelf: false</code> را دارد. گزینه‌هایی مثل
+            <code>source</code>، <code>includeParticipants</code>،
+            <code>excludeParticipants</code>، <code>trackId</code> و شناسه‌های
+            گروه/ویس‌چت دیگر پشتیبانی نمی‌شوند و در صورت ارسال خطای TypeError
+            دریافت می‌کنید.
+          </p>
+          <h3>فرمت و رفتار استریم</h3>
+          <ul>
+            <li>
+              فایل مقصد از آغاز ضبط به‌صورت placeholder ساخته می‌شود؛ فریم‌های
+              همهٔ اعضای Remote و در صورت فعال‌بودن self در میکسر جمع می‌شوند و
+              یک FFmpeg encoder خروجی را می‌سازد.
+            </li>
+            <li>
+              فایل OGG/MP3 ممکن است تا توقف ضبط و finalize قابل پخش نباشد؛ فقط
+              فایل نهایی پس از بستن encoder قابل اتکاست.
+            </li>
+            <li>
+              تمام صدای دریافت‌شده در یک فایل واحد قرار می‌گیرد؛ فایل جداگانهٔ
+              self یا فایل مجزا برای افراد ساخته نمی‌شود.
+            </li>
+            <li>
+              برای فایل نهایی یک metadata با پسوند <code>.json</code> ساخته
+              می‌شود.
+            </li>
+            <li>
+              <code>stopRecording()</code> ورودی FFmpeg را می‌بندد و metadata
+              نهایی را می‌نویسد.
+            </li>
+            <li>
+              در خروج عادی با <code>client.close()</code> یا دریافت
+              SIGINT/SIGTERM، کتابخانه ضبط فعال را نهایی می‌کند.
+            </li>
+            <li>
+              قطع برق، کرش سیستم، <code>SIGKILL</code> یا
+              <code>process.exit()</code> اجباری فرصت finalize نمی‌دهد.
+            </li>
+          </ul>
+          <div class="callout danger">
+            <b>رضایت و حریم خصوصی</b>
+            <p>
+              ضبط فقط با رضایت روشن شرکت‌کنندگان انجام شود.
+              <code>consentConfirmed: true</code> تأیید مسئولیت برنامه‌نویس است
+              و جایگزین اخذ رضایت واقعی نیست. قوانین محلی مربوط به ضبط مکالمات
+              را رعایت کنید.
+            </p>
+          </div>
+        </section>
+
+        <section id="playback">
+          <div class="section-heading">
+            <span>09</span>
+            <h2>پخش موسیقی و کنترل صدا</h2>
+          </div>
+          <pre><code class="language-javascript">await client.play('./music.mp3');
+client.enqueue('./next.ogg');
+client.enqueueMany(['./third.wav', './fourth.mp3']);
+
+client.pause();
+client.resume();
+await client.seek(45); // ثانیه
+await client.next();
+await client.previous();
+await client.stop();</code></pre>
+          <h3>سرعت پخش</h3>
+          <pre><code class="language-javascript">await client.setSpeed(1.5);             // 0.5 تا 2
+await client.setPlaybackSpeed(1.25);    // alias
+await client.increasePlaybackSpeed(0.1);
+await client.decreasePlaybackSpeed(0.1);
+await client.resetPlaybackSpeed();      // 1.0x</code></pre>
+          <h3>ولوم و وضعیت صف</h3>
+          <pre><code class="language-javascript">client.setVolume(80);          // 0 تا 200 درصد
+client.setPlaybackVolume(80);  // alias
+console.log(client.getPlaybackStatus());
+console.log(client.getQueue());
+client.removeFromQueue(0);     // index از صفر
+client.clearQueue();</code></pre>
+          <p>
+            سرعت و ولوم به‌صورت درصد/ضریب روی صدای خروجی Player اعمال می‌شوند؛
+            این تنظیمات ولوم صدای ورودی شرکت‌کنندگان را تغییر نمی‌دهند.
+          </p>
+        </section>
+
+        <section id="api">
+          <div class="section-heading">
+            <span>10</span>
+            <h2>مرجع متدهای عمومی VoiceClient</h2>
+          </div>
+          <p>
+            تمام متدهای زیر مستقیماً روی شیء <code>client</code> در دسترس هستند.
+            این نسخه عمداً فقط یک Voice Chat فعال را در هر نمونهٔ کلاینت مدیریت
+            می‌کند.
+          </p>
+          <div class="callout info">
+            <b>متدهای EventEmitter</b>
+            <p>
+              از آنجا که <code>VoiceClient</code> از EventEmitter نود ارث‌بری
+              می‌کند، متدهای استاندارد <code>on</code>، <code>once</code>،
+              <code>off</code>، <code>removeListener</code>،
+              <code>removeAllListeners</code>، <code>emit</code>،
+              <code>listenerCount</code> و <code>eventNames</code> نیز در دسترس
+              هستند.
+            </p>
+          </div>
+          <h3>سازنده و سیشن</h3>
+          <div class="api-item">
+            <code>new VoiceClient(sessionName, options?)</code>
+            <p>ساخت کلاینت با نام سیشن.</p>
+          </div>
+          <div class="api-item">
+            <code>new VoiceClient(auth, privateKeyB64OrPem, options?)</code>
+            <p>ساخت کلاینت با اعتبارنامهٔ مستقیم.</p>
+          </div>
+          <div class="api-item">
+            <code>new VoiceClient({ auth, privateKeyB64, ...options })</code>
+            <p>ساخت کلاینت با آبجکت تنظیمات.</p>
+          </div>
+          <div class="api-item">
+            <code>start(options?: object): Promise&lt;VoiceClient&gt;</code>
+            <p>آماده‌سازی API و بارگذاری یا ایجاد سیشن.</p>
+          </div>
+          <div class="api-item">
+            <code>deleteSession(name?: string): boolean</code>
+            <p>حذف سیشن نام‌دار از ذخیره‌ساز محلی.</p>
+          </div>
+          <div class="api-item">
+            <code>close(): Promise&lt;void&gt;</code>
+            <p>توقف ضبط، خروج از ویس‌چت فعلی و آزادسازی Player و ذخیره‌ساز.</p>
+          </div>
+          <h3>اتصال و کنترل Voice Chat</h3>
+          <div class="api-item">
+            <code
+              >joinVoiceChat(groupGuid: string, options?: object):
+              Promise&lt;JoinResult&gt;</code
+            >
+            <p>
+              ورود به یک گروه؛ تنها متدی که به GUID گروه نیاز دارد. شناسهٔ
+              ویس‌چت داخلی ذخیره می‌شود.
+            </p>
+          </div>
+          <div class="api-item">
+            <code>connect(groupGuid: string, options?: object)</code>
+            <p>نام جایگزین <code>joinVoiceChat</code>.</p>
+          </div>
+          <div class="api-item">
+            <code>leaveVoiceChat(): Promise&lt;object&gt;</code>
+            <p>
+              خروج از ویس‌چت فعال بدون نیاز به شناسه؛ کلاینت جفت شناسه‌های داخلی
+              را به API روبیکا می‌فرستد.
+            </p>
+          </div>
+          <div class="api-item">
+            <code
+              >mute(): Promise&lt;boolean&gt; · unmute():
+              Promise&lt;boolean&gt;</code
+            >
+            <p>Mute و Unmute حساب جاری.</p>
+          </div>
+          <div class="api-item">
+            <code>requestSpeak(): Promise&lt;object&gt;</code>
+            <p>ارسال درخواست اجازهٔ صحبت.</p>
+          </div>
+          <div class="api-item">
+            <code
+              >muteParticipant(participantObjectGuid: string):
+              Promise&lt;object&gt; · unmuteParticipant(participantObjectGuid:
+              string): Promise&lt;object&gt;</code
+            >
+            <p>
+              درخواست Mute یا Unmute برای یک شرکت‌کننده؛ مربوط به مدیریت است و
+              فیلتر ضبط نیست.
+            </p>
+          </div>
+          <div class="api-item">
+            <code
+              >setVoiceChatSettings(settings: object):
+              Promise&lt;object&gt;</code
+            >
+            <p>به‌روزرسانی تنظیمات ویس‌چت فعلی.</p>
+          </div>
+          <div class="api-item">
+            <code>discardVoiceChat(): Promise&lt;object&gt;</code>
+            <p>
+              پایان‌دادن به خود Voice Chat فعلی و سپس قطع اتصال محلی؛ ممکن است
+              به مجوز مدیریتی نیاز داشته باشد.
+            </p>
+          </div>
+          <div class="api-item">
+            <code
+              >disconnect(options?: { leave?: boolean }):
+              Promise&lt;object&gt;</code
+            >
+            <p>
+              قطع اتصال تنها ویس‌چت فعال. <code>leave</code> پیش‌فرض true است.
+              هیچ پارامتر گروه یا شناسهٔ ویس‌چت نمی‌گیرد.
+            </p>
+          </div>
+          <h3>شرکت‌کنندگان و Updateها</h3>
+          <div class="api-item">
+            <code
+              >getParticipants(options?: { startId?: string }):
+              Promise&lt;ParticipantPage&gt;</code
+            >
+            <p>دریافت یک صفحه از شرکت‌کنندگان.</p>
+          </div>
+          <div class="api-item">
+            <code>getAllParticipants(): Promise&lt;Participant[]&gt;</code>
+            <p>دریافت همهٔ صفحه‌ها تا پایان فهرست.</p>
+          </div>
+          <div class="api-item">
+            <code
+              >getVoiceChatParticipants(options?: { all?: boolean, startId?:
+              string }): Promise&lt;Participant[] | ParticipantPage&gt;</code
+            >
+            <p>
+              دریافت همه به‌صورت پیش‌فرض؛ با <code>all: false</code> فقط یک
+              صفحه.
+            </p>
+          </div>
+          <div class="api-item">
+            <code>getVoiceChatUpdates(): Promise&lt;object&gt;</code>
+            <p>گرفتن تغییرات ویس‌چت و به‌روزرسانی state داخلی.</p>
+          </div>
+          <div class="api-item">
+            <code
+              >startVoiceChatUpdates(options?: { intervalMs?: number }): boolean
+              · stopVoiceChatUpdates(): boolean</code
+            >
+            <p>شروع و توقف polling تغییرات؛ بازهٔ پیش‌فرض ۱۵۰۰۰ میلی‌ثانیه.</p>
+          </div>
+          <h3>پخش موسیقی</h3>
+          <div class="api-item">
+            <code
+              >play(file: string): Promise&lt;AudioPlayer&gt; · enqueue(file:
+              string): number · enqueueMany(files: string[]): number</code
+            >
+            <p>پخش فوری یا افزودن به صف.</p>
+          </div>
+          <div class="api-item">
+            <code
+              >next(): Promise&lt;boolean&gt; · previous():
+              Promise&lt;boolean&gt; · pause(): boolean · resume(): boolean ·
+              stop(): Promise&lt;object&gt;</code
+            >
+            <p>کنترل پخش.</p>
+          </div>
+          <div class="api-item">
+            <code
+              >seek(seconds: number): Promise&lt;number&gt; · setSpeed(speed:
+              number): Promise&lt;number&gt; · setPlaybackSpeed(speed: number):
+              Promise&lt;number&gt;</code
+            >
+            <p>موقعیت و سرعت پخش.</p>
+          </div>
+          <div class="api-item">
+            <code
+              >increasePlaybackSpeed(step?: number) ·
+              decreasePlaybackSpeed(step?: number) · resetPlaybackSpeed()</code
+            >
+            <p>تغییر سرعت با گام پیش‌فرض ۰٫۱ یا بازگرداندن به ۱.</p>
+          </div>
+          <div class="api-item">
+            <code
+              >setVolume(percent: number) · setPlaybackVolume(percent:
+              number)</code
+            >
+            <p>ولوم Player بین صفر تا ۲۰۰ درصد.</p>
+          </div>
+          <div class="api-item">
+            <code
+              >getPlaybackStatus() · getQueue() · clearQueue() ·
+              removeFromQueue(index: number)</code
+            >
+            <p>وضعیت، صف و مدیریت آیتم‌های صف پخش.</p>
+          </div>
+          <h3>ضبط تمام صداها</h3>
+          <div class="api-item">
+            <code
+              >startRecording(options?: { output?, format?, includeSelf?,
+              consentConfirmed?, finalizeOnProcessExit? }):
+              Promise&lt;RecordingStartResult&gt;</code
+            >
+            <p>
+              ضبط تمام صدای Remote در ویس‌چت فعال و در صورت فعال‌بودن
+              <code>includeSelf</code> ادغام صدای Player در همان فایل. شناسهٔ
+              گروه یا ویس‌چت نمی‌گیرد.
+            </p>
+          </div>
+          <div class="api-item">
+            <code
+              >startAllParticipantsRecording(options?: RecordingOptions):
+              Promise&lt;RecordingStartResult&gt;</code
+            >
+            <p>
+              نام جایگزین <code>startRecording()</code> با همان رفتار و مقدار
+              پیش‌فرض <code>includeSelf: false</code>.
+            </p>
+          </div>
+          <div class="api-item">
+            <code>setRecordingFilter({ includeSelf: boolean }): object</code>
+            <p>
+              روشن یا خاموش‌کردن صدای Player در میکس در حین ضبط فعال؛ گزینهٔ
+              دیگری پشتیبانی نمی‌شود.
+            </p>
+          </div>
+          <div class="api-item">
+            <code
+              >stopRecording(options?: { reason?: string }):
+              Promise&lt;string&gt;</code
+            >
+            <p>توقف و finalize فایل؛ نیازی به شناسهٔ گروه یا ویس‌چت نیست.</p>
+          </div>
+          <div class="api-item">
+            <code>getRecordingFiles(): RecordingFile[]</code>
+            <p>دریافت مسیر و اطلاعات فایل خروجی فعلی/آخرین ضبط.</p>
+          </div>
+          <h3>وضعیت</h3>
+          <div class="api-item">
+            <code>getStatus(): object</code>
+            <p>وضعیت اتصال، Player و Recorder ویس‌چت فعلی.</p>
+          </div>
+        </section>
+
+        <section id="events">
+          <div class="section-heading">
+            <span>11</span>
+            <h2>مرجع رویدادها</h2>
+          </div>
+          <p>
+            همهٔ رویدادهای سطح‌بالا با
+            <code>client.on(name, callback)</code> قابل دریافت هستند. رویدادهای
+            colon-style نام اصلی و رویدادهای خط‌تیره‌ای alias سازگاری‌اند.
+            رویداد <code>client-event</code> همهٔ رویدادهای سطح‌بالایی را که از
+            مسیر انتشار داخلی عبور می‌کنند، با payload یکپارچه و timestamp تحویل
+            می‌دهد؛ فریم‌های خام صوتی و رویدادهای خام ترک را مستقیماً با نام
+            رویداد خودشان دریافت کنید.
+          </p>
+          <pre><code class="language-javascript">client.on('client-event', event =&gt; {
+  console.log(event.timestamp, event.event, event);
+});</code></pre>
+          <h3>چرخهٔ کلاینت و سیشن</h3>
+          <div class="event-list">
+            <code>client:starting</code><code>client:ready</code
+            ><code>client:disconnecting</code><code>client:disconnected</code
+            ><code>client:closing</code><code>client:closed</code
+            ><code>session:created</code><code>session:loaded</code
+            ><code>session:invalidated</code><code>session:missing</code
+            ><code>session:error</code><code>ready</code><code>error</code>
+          </div>
+          <h3>اتصال WebRTC</h3>
+          <div class="event-list">
+            <code>connection:connecting</code><code>connection:connected</code
+            ><code>connection:reconnected</code
+            ><code>connection:disconnected</code
+            ><code>connection:ice-state</code><code>connection:state</code
+            ><code>connection-lost</code><code>ice-state</code>
+          </div>
+          <h3>Voice Chat و شرکت‌کنندگان</h3>
+          <div class="event-list">
+            <code>voice-chat:joining</code><code>voice-chat:joined</code
+            ><code>voice-chat:ready</code><code>voice-chat:join-failed</code
+            ><code>voice-chat:leaving</code><code>voice-chat:left</code
+            ><code>voice-chat:muted</code><code>voice-chat:unmuted</code
+            ><code>voice-chat:speak-requested</code
+            ><code>voice-chat:participants</code
+            ><code>voice-chat:participants-page</code
+            ><code>voice-chat:participants-reset</code
+            ><code>voice-chat:participant-updates</code
+            ><code>voice-chat:updates</code><code>voice-chat:update</code
+            ><code>voice-chat:update-error</code
+            ><code>voice-chat:updates-started</code
+            ><code>voice-chat:updates-stopped</code
+            ><code>voice-chat:discarding</code><code>voice-chat:discarded</code
+            ><code>remote-track:added</code><code>remote-track:removed</code
+            ><code>remote-audio-frame</code><code>remote-track</code
+            ><code>remote-track-ended</code><code>participants</code
+            ><code>participant-updates</code><code>participants-reset</code>
+          </div>
+          <h3>پخش و تغییر آهنگ</h3>
+          <div class="event-list">
+            <code>track:starting</code><code>track:started</code
+            ><code>track:changing</code><code>track:changed</code
+            ><code>track:interrupted</code><code>track:queued</code
+            ><code>track:skipped</code><code>track:finished</code
+            ><code>track:stopped</code><code>track:error</code
+            ><code>playback:started</code><code>playback:progress</code
+            ><code>playback:finished</code><code>playback:paused</code
+            ><code>playback:resumed</code><code>playback:stopped</code
+            ><code>playback:seeked</code><code>playback:speed-changed</code
+            ><code>playback:volume-changed</code
+            ><code>playback:queue-updated</code
+            ><code>playback:queue-cleared</code
+            ><code>playback:queue-item-removed</code
+            ><code>playback:queue-empty</code><code>playback:state</code
+            ><code>playback:error</code><code>track-playing</code
+            ><code>track-ended</code><code>track-queued</code
+            ><code>playback-paused</code><code>playback-resumed</code
+            ><code>playback-stopped</code><code>audio-frame</code>
+          </div>
+          <h3>ضبط استریم</h3>
+          <div class="event-list">
+            <code>recording:starting</code><code>recording:started</code
+            ><code>recording:file-created</code><code>recording:file-ready</code
+            ><code>recording:progress</code><code>recording:filter-changed</code
+            ><code>recording:stopping</code><code>recording:stopped</code
+            ><code>recording:failed</code><code>recording:no-audio</code
+            ><code>recording:error</code><code>recording-no-audio</code
+            ><code>recording-started</code><code>recording-stopped</code>
+          </div>
+          <h3>Aliasهای خط‌تیره‌ای رویدادهای سطح‌بالا</h3>
+          <div class="event-list">
+            <code>connection-connecting</code><code>connection-connected</code
+            ><code>connection-reconnected</code
+            ><code>connection-disconnected</code><code>voice-chat-joining</code
+            ><code>voice-chat-joined</code><code>voice-chat-join-failed</code
+            ><code>voice-chat-leaving</code><code>voice-chat-left</code
+            ><code>track-starting</code><code>track-started</code
+            ><code>track-changing</code><code>track-changed</code
+            ><code>track-interrupted</code><code>track-skipped</code
+            ><code>track-finished</code><code>track-stopped</code
+            ><code>track-error</code><code>playback-started</code
+            ><code>playback-progress</code><code>playback-finished</code
+            ><code>playback-seeked</code><code>playback-speed-changed</code
+            ><code>playback-volume-changed</code
+            ><code>playback-queue-updated</code><code>playback-queue-empty</code
+            ><code>recording-starting</code><code>recording-progress</code
+            ><code>recording-file-created</code
+            ><code>recording-filter-changed</code><code>recording-stopping</code
+            ><code>recording-failed</code><code>recording-error</code>
+          </div>
+        </section>
+
+        <section id="configuration">
+          <div class="section-heading">
+            <span>12</span>
+            <h2>تنظیمات</h2>
+          </div>
+          <p>
+            تنظیمات را می‌توان در سازنده با <code>{ config: { ... } }</code> یا
+            از طریق متغیرهای محیطی فایل <code>.env</code> وارد کرد. مقادیر حساس
+            مانند auth و private key را در مخزن عمومی قرار ندهید.
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>بخش</th>
+                <th>کلیدهای مهم</th>
+                <th>توضیح</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>API</td>
+                <td>
+                  <code>api.auth</code>، <code>api.privateKeyB64</code>،
+                  <code>api.client.app_version</code>
+                </td>
+                <td>اعتبارنامه و مشخصات نسخهٔ کلاینت روبیکا.</td>
+              </tr>
+              <tr>
+                <td>Session</td>
+                <td>
+                  <code>session.name</code>، <code>session.databasePath</code>،
+                  <code>session.keyFilePath</code>،
+                  <code>session.encryptionKey</code>
+                </td>
+                <td>ذخیره‌سازی محلی سیشن رمز‌شده.</td>
+              </tr>
+              <tr>
+                <td>Voice</td>
+                <td>
+                  <code>voice.iceTimeoutMs</code>،
+                  <code>voice.autoUnmute</code>،
+                  <code>voice.sendActivity</code>،
+                  <code>voice.activityIntervalMs</code>
+                </td>
+                <td>تنظیم اتصال و رفتار Voice Chat.</td>
+              </tr>
+              <tr>
+                <td>Audio</td>
+                <td>
+                  <code>audio.ffmpegPath</code>،
+                  <code>audio.recordingDir</code>، <code>audio.keepRaw</code>،
+                  <code>audio.frameMs</code>
+                </td>
+                <td>مسیر FFmpeg، پوشه ضبط و پارامترهای Player/Recorder.</td>
+              </tr>
+            </tbody>
+          </table>
+          <p>
+            فهرست مقادیر پیش‌فرض و نمونهٔ کامل را در فایل
+            <code>.env.example</code> ریشهٔ پروژه ببینید.
+          </p>
+        </section>
+
+        <section id="logging">
+          <div class="section-heading">
+            <span>13</span>
+            <h2>فعال یا غیرفعال‌کردن Logها</h2>
+          </div>
+          <p>
+            کلاس عمومی کتابخانه <code>VoiceClient</code> است. می‌توانی هنگام
+            ساخت نمونهٔ آن لاگ‌های داخلی را خاموش یا سطح آن‌ها را مشخص کنی. این
+            گزینه فقط خروجی Logger داخلی را کنترل می‌کند؛ رویدادهای EventEmitter
+            همچنان ارسال می‌شوند.
+          </p>
+          <pre><code class="language-javascript">const client = new VoiceClient('my-session', {
+  logging: false // بدون لاگ داخلی کتابخانه
+});
+
+// یا با سطح مشخص:
+const verboseClient = new VoiceClient('debug-session', {
+  logging: true,
+  logLevel: 'debug' // debug | info | warn | error
+});</code></pre>
+          <pre><code class="language-javascript">const directClient = new VoiceClient(auth, privateKeyB64, { logging: false });</code></pre>
+          <p>
+            همچنین <code>logs: false</code> و <code>logger: false</code> alias
+            خاموش‌کردن لاگ هستند. در صورت ارسال شیء سفارشی <code>logger</code>،
+            همان logger سفارشی استفاده می‌شود و بر گزینهٔ خاموش‌کردن پیش‌فرض
+            اولویت دارد.
+          </p>
+        </section>
+
+        <section id="limitations">
+          <div class="section-heading">
+            <span>14</span>
+            <h2>محدودیت‌ها و نکات فنی</h2>
+          </div>
+          <ul>
+            <li>
+              در هر نمونهٔ <code>VoiceClient</code> فقط یک Voice Chat می‌تواند
+              فعال باشد. برای تغییر گروه، ابتدا <code>leaveVoiceChat()</code> را
+              اجرا کنید.
+            </li>
+            <li>
+              ضبط شامل تمام صدای Remote دریافتی است؛ امکان Allow-list،
+              Block-list یا ضبط یک شرکت‌کنندهٔ مشخص وجود ندارد.
+            </li>
+            <li>
+              <code>includeSelf</code> فقط صدای خروجی Player کتابخانه را کنترل
+              می‌کند، نه میکروفون فیزیکی سیستم.
+            </li>
+            <li>
+              فایل استریم در خروج graceful و سیگنال‌های SIGINT/SIGTERM نهایی
+              می‌شود؛ خاموشی ناگهانی یا SIGKILL امکان finalize را از بین می‌برد.
+            </li>
+            <li>
+              خروجی OGG/MP3 پس از توقف graceful و بسته‌شدن encoder فایل نهایی
+              قابل‌پخش است؛ فایل در حین ضبط الزاماً قابل‌پخش نیست.
+            </li>
+            <li>
+              تست‌های محلی جایگزین آزمایش با حساب و Voice Chat واقعی روبیکا
+              نیستند؛ رفتار سرور و دسترسی حساب می‌تواند اثرگذار باشد.
+            </li>
+          </ul>
+        </section>
+
+        <section id="troubleshooting">
+          <div class="section-heading">
+            <span>15</span>
+            <h2>عیب‌یابی</h2>
+          </div>
+          <details>
+            <summary>خطای FFmpeg یا ساخته‌نشدن فایل</summary>
+            <p>
+              خروجی <code>ffmpeg -version</code> و
+              <code>ffmpeg -encoders</code> را بررسی کنید. مسیر باینری را در
+              <code>audio.ffmpegPath</code> قرار دهید و مجوز نوشتن پوشه ضبط را
+              کنترل کنید.
+            </p>
+          </details>
+          <details>
+            <summary>فایل خروجی خالی یا بدون صدای قابل پخش است</summary>
+            <p>
+              مطمئن شوید پس از اتصال موفق به ویس‌چت، فریم‌های صوتی دریافت
+              می‌شوند و در زمان پایان،
+              <code>await client.stopRecording()</code> یا
+              <code>await client.close()</code> اجرا شده است. در صورت عدم دریافت
+              فریم، فایل placeholder همراه metadata با
+              <code>status: no-audio</code> باقی می‌ماند و رویداد
+              <code>recording:no-audio</code> ارسال می‌شود.
+            </p>
+          </details>
+          <details>
+            <summary>چگونه self را وسط ضبط فعال یا غیرفعال کنم؟</summary>
+            <p>
+              در زمان ضبط،
+              <code>client.setRecordingFilter({ includeSelf: true })</code> صدای
+              خروجی Player را به میکس اضافه می‌کند و مقدار false آن را از
+              فریم‌های بعدی کنار می‌گذارد. این متد فقط همین گزینه را می‌پذیرد.
+            </p>
+          </details>
+          <details>
+            <summary>چرا نمی‌توانم به گروه دوم وصل شوم؟</summary>
+            <p>
+              هر نمونهٔ VoiceClient فقط یک ویس‌چت فعال دارد. ابتدا
+              <code>await client.leaveVoiceChat()</code> را اجرا کنید و سپس با
+              <code>await client.joinVoiceChat('OTHER_GROUP_GUID')</code> به
+              گروه بعدی وارد شوید.
+            </p>
+          </details>
+          <details>
+            <summary>فایل OGG در حین ضبط سریع رشد نمی‌کند</summary>
+            <p>
+              فایل مقصد ممکن است تا توقف ضبط و finalize placeholder یا ناقص
+              باشد. پس از <code>await client.stopRecording()</code> آن را با
+              <code>ffprobe</code> بررسی کنید.
+            </p>
+          </details>
+          <details>
+            <summary>بعد از پایان برنامه فایل نهایی نشده است</summary>
+            <p>
+              از <code>await client.close()</code> استفاده کنید یا اجازه دهید
+              برنامه SIGINT/SIGTERM را graceful دریافت کند.
+              <code>process.exit()</code>، SIGKILL، crash سیستم و قطع برق قابل
+              نهایی‌سازی تضمین‌شده نیستند.
+            </p>
+          </details>
+          <details>
+            <summary>رمز دومرحله‌ای، CodeIsInvalid یا CodeIsUsed</summary>
+            <p>
+              راهنمای <code>hint_pass_key</code> در پرانتز کنار درخواست گذرواژه
+              نمایش داده می‌شود. اگر رمز اشتباه باشد وضعیت
+              <code>InvalidPassKey</code> باعث تکرار درخواست گذرواژه می‌شود.
+              <code>CodeIsInvalid</code> یعنی کد ورود اشتباه است و دوباره پرسیده
+              می‌شود؛ <code>CodeIsUsed</code> یعنی کد قبلاً مصرف شده و کتابخانه
+              ابتدا با <code>sendCode</code> کد تازه می‌گیرد.
+            </p>
+          </details>
+          <details>
+            <summary>
+              چرا registerDevice بعد از تغییر نسخه دوباره اجرا نمی‌شود؟
+            </summary>
+            <p>
+              این رفتار عمدی است: ثبت دستگاه فقط هنگام ایجاد سشن جدید انجام
+              می‌شود. سشن ذخیره‌شده در اجرای بعدی بازیابی می‌شود و صرف تغییر
+              <code>RUBIKA_APP_VERSION</code> باعث ثبت دوبارهٔ دستگاه نخواهد شد.
+            </p>
+          </details>
+          <details>
+            <summary>NOT_REGISTERED و TOO_REQUESTS</summary>
+            <p>
+              در سیشن نام‌دار، NOT_REGISTERED باعث حذف سیشن منقضی و شروع مجدد
+              ورود می‌شود؛ پس از ایجاد سشن جدید،
+              <code>registerDevice</code> برای آن سشن جدید اجرا خواهد شد.
+              TOO_REQUESTS فقط به‌عنوان rate-limit گزارش می‌شود و سیشن را حذف
+              نمی‌کند.
+            </p>
+          </details>
+        </section>
+
+        <section id="changelog">
+          <div class="section-heading">
+            <span>16</span>
+            <h2>نسخه و همگام‌سازی مستندات</h2>
+          </div>
+          <p>
+            این مستندات برای نسخهٔ <b>1.5.3</b> نوشته شده‌اند و هم‌زمان با API
+            عمومی کتابخانه به‌روزرسانی می‌شوند.
+          </p>
+          <ul>
+            <li>مرجع API عمومی: <code>src/core/voice-client.js</code></li>
+            <li>
+              مرجع ضبط استریم:
+              <code>src/audio/streaming-audio-recorder.js</code>
+            </li>
+            <li>مرجع پخش: <code>src/audio/audio-player.js</code></li>
+            <li>
+              آزمون‌های ضبط استریم: <code>test/streaming-recorder.test.js</code>
+            </li>
+            <li>
+              آزمون مدیریت تک‌ویس‌چت: <code>test/single-room.test.js</code>
+            </li>
+          </ul>
+        </section>
+
+        <footer>
+          <p>Rubika Voice · JavaScript · Voice Chat Toolkit</p>
+          <p>
+            ساخته‌شده توسط <b>محمد افروزه / Mohammad Afrouzeh (TechCode)</b> ·
+            <a
+              href="https://github.com/techcodeco"
+              target="_blank"
+              rel="noopener noreferrer"
+              >پروفایل توسعه‌دهنده</a
+            >
+            ·
+            <a
+              href="https://github.com/techcodeco/rubika-voice-chat"
+              target="_blank"
+              rel="noopener noreferrer"
+              >مخزن پروژه</a
+            >
+          </p>
+          <small>مستندات نسخهٔ 1.5.3</small>
+        </footer>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.12.0/build/highlight.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (window.hljs) window.hljs.highlightAll();
+
+        // Highlight the sidebar item for the section currently occupying the viewport.
+        const sidebarLinks = [
+          ...document.querySelectorAll('.sidebar a[href^="#"]'),
+        ];
+        const sectionById = new Map(
+          sidebarLinks.map((link) => [
+            link.getAttribute("href").slice(1),
+            link,
+          ]),
+        );
+        const visibleSections = new Set();
+        const activateSidebarItem = () => {
+          const candidates = [...visibleSections]
+            .map((section) => ({
+              section,
+              rect: section.getBoundingClientRect(),
+            }))
+            .sort(
+              (a, b) =>
+                Math.abs(a.rect.top - window.innerHeight * 0.32) -
+                Math.abs(b.rect.top - window.innerHeight * 0.32),
+            );
+          const activeSection = candidates[0]?.section;
+          sidebarLinks.forEach((link) => {
+            const active =
+              activeSection && link === sectionById.get(activeSection.id);
+            link.classList.toggle("active", Boolean(active));
+            if (active) link.setAttribute("aria-current", "location");
+            else link.removeAttribute("aria-current");
+          });
+        };
+        if ("IntersectionObserver" in window) {
+          const sectionObserver = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) visibleSections.add(entry.target);
+                else visibleSections.delete(entry.target);
+              });
+              activateSidebarItem();
+            },
+            { rootMargin: "-18% 0px -68% 0px", threshold: 0 },
+          );
+          document
+            .querySelectorAll(".content section[id]")
+            .forEach((section) => sectionObserver.observe(section));
+        }
+
+        document.querySelectorAll("pre > code").forEach((code) => {
+          const pre = code.parentElement;
+          if (pre.querySelector(".copy-code")) return;
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "copy-code";
+          button.textContent = "کپی کد";
+          button.setAttribute("aria-label", "کپی متن نمونه کد");
+          button.addEventListener("click", async () => {
+            const content = code.innerText;
+            try {
+              if (navigator.clipboard && window.isSecureContext)
+                await navigator.clipboard.writeText(content);
+              else {
+                const area = document.createElement("textarea");
+                area.value = content;
+                area.style.position = "fixed";
+                area.style.opacity = "0";
+                document.body.appendChild(area);
+                area.select();
+                document.execCommand("copy");
+                area.remove();
+              }
+              button.textContent = "کپی شد ✓";
+              setTimeout(() => {
+                button.textContent = "کپی کد";
+              }, 1600);
+            } catch {
+              button.textContent = "کپی ناموفق";
+            }
+          });
+          pre.appendChild(button);
+        });
+      });
+    </script>
+  </body>
+</html>
